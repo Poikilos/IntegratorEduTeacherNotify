@@ -1,0 +1,10 @@
+#This is the whole list of date ranges for the current calendar. The date range tells the program which schedule to use.
+-
+  schedule:school year   # the first half of the school year.
+  first:"01\/04"
+  last:"06\/03"
+    #For a school year divided by winter break, the two semesters must be separate. The first date must be before or equal to last date.
+-
+  schedule:school year
+  first:"08\/24"
+  last:"12\/18"
