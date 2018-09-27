@@ -60,25 +60,25 @@ namespace ExpertMultimedia
 			notifyIcon = new NotifyIcon();
 			notificationMenu = new ContextMenu(InitializeMenu());
 			
-			notifyIcon.DoubleClick += IconDoubleClick;
+			notifyIcon.DoubleClick += iconDoubleClick;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationIcon));
 			notifyIcon.Icon = (Icon)resources.GetObject("$this.Icon");
 			notifyIcon.ContextMenu = notificationMenu;
 
 			thirtyMinuteTimer = new System.Windows.Forms.Timer();
 			thirtyMinuteTimer.Interval = 1000*60*10;
-			thirtyMinuteTimer.Tick += new EventHandler(ThirtyMinuteTimerTick);
+			thirtyMinuteTimer.Tick += new EventHandler(thirtyMinuteTimerTick);
 			
 			secondlyTimer = new System.Windows.Forms.Timer();
 			secondlyTimer.Interval = 1000;
-			secondlyTimer.Tick += new EventHandler(SecondlyTimerTick);
+			secondlyTimer.Tick += new EventHandler(secondlyTimerTick);
 			last_daily_alert_not_including_before_loadtime_alerts_time = settings_load_datetime;
-			LoadSettings();
+			loadSettings();
 			thirtyMinuteTimer.Start();
 			secondlyTimer.Start();
 			MessageForm.msgform = new MessageForm();
 		}
-		private void LoadSettings() {
+		private void loadSettings() {
 			
 			if (data_path==null) {
 				//only use hard drive once per run:
@@ -116,7 +116,7 @@ namespace ExpertMultimedia
 					}
 				}
 				catch (Exception exn) {
-					Console.Error.WriteLine("LoadSettings could not finish: "+exn.ToString());
+					Console.Error.WriteLine("loadSettings could not finish: "+exn.ToString());
 				}
 			}
 			if (data_path==null) data_path=@"\\FCAFILES\main\Operations\BellSettings";;
@@ -245,14 +245,14 @@ namespace ExpertMultimedia
 
 			settings_load_datetime = DateTime.Now;
 			last_daily_alert_not_including_before_loadtime_alerts_time = settings_load_datetime; //prevents loading backlogged events
-			UpdateStatus();
+			updateStatus();
 		}
-		private void ThirtyMinuteTimerTick(object sender, EventArgs e) {
+		private void thirtyMinuteTimerTick(object sender, EventArgs e) {
 			thirty_minute_check_count+=1;
-			LoadSettings();
-			UpdateStatus();
+			loadSettings();
+			updateStatus();
 		}
-		private string get_day_from_two_character(string two_char_day_string) {
+		private string getDayFromTwoChars(string two_char_day_string) {
 			string result = null;
 			if (two_char_day_string!=null) {
 				string two_char_day_string_lower = two_char_day_string.ToLower();
@@ -268,7 +268,7 @@ namespace ExpertMultimedia
 			else last_error_string="A day abbreviation is null in "+events_file_path;
 			return result;
 		}
-		private void SecondlyTimerTick(object sender, EventArgs e) {
+		private void secondlyTimerTick(object sender, EventArgs e) {
 			string my_error_string="";
 			if (secondlyTimer.Enabled) {
 				any_disposable_timed_events_today = false;
@@ -392,11 +392,11 @@ namespace ExpertMultimedia
 					}
 					catch (Exception exn){
 						if (!string.IsNullOrEmpty(my_error_string)) my_error_string=my_error_string+" AND ";
-						my_error_string+="SecondlyTimerTick could not finish because "+exn.ToString();
+						my_error_string+="secondlyTimerTick could not finish because "+exn.ToString();
 					}
 				}
 				else {
-					my_error_string="SecondlyTimerTick found null daily_disposable_events_table.";
+					my_error_string="secondlyTimerTick found null daily_disposable_events_table.";
 				}
 				secondlyTimer.Enabled=true;
 			}
@@ -404,9 +404,9 @@ namespace ExpertMultimedia
 				my_error_string="secondly timer was already firing.";
 			}
 			if (!string.IsNullOrEmpty(my_error_string)) last_error_string=my_error_string;
-			UpdateStatus();
-		}//end SecondlyTimerTick
-		private void UpdateStatus() {
+			updateStatus();
+		}//end secondlyTimerTick
+		private void updateStatus() {
 			status_string = "\n\nCurrent status:";
 			status_string+="\n  secondly check count: "+secondly_check_count.ToString();
 			status_string+="\n  thirty minute check count: "+thirty_minute_check_count.ToString();
@@ -470,7 +470,7 @@ namespace ExpertMultimedia
 			Application.Exit();
 		}
 		
-		private void IconDoubleClick(object sender, EventArgs e)
+		private void iconDoubleClick(object sender, EventArgs e)
 		{
 			MessageForm.ShowMessage(my_about_string+status_string, "About "+my_display_name_and_version);
 		}
