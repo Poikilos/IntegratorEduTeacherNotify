@@ -58,9 +58,7 @@
     <Compile Include="..\IntegratorEdu\YAMLObject.cs">
       <Link>YAMLObject.cs</Link>
     </Compile>
-    <Compile Include="..\RetroEngine\src\RTable.cs">
-      <Link>RTable.cs</Link>
-    </Compile>
+    <Compile Include="FastTable.cs" />
     <Compile Include="IEduEventCategory.cs" />
     <Compile Include="MessageForm.cs" />
     <Compile Include="MessageForm.Designer.cs">

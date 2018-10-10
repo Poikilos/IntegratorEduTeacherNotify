@@ -13,6 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using Microsoft.VisualBasic.FileIO; // TextFieldParser (requires VisualBasic.dll
 
 namespace ExpertMultimedia
 {
@@ -40,7 +41,8 @@ namespace ExpertMultimedia
 		private static int thirty_minute_check_count = 0;
 		private static System.Windows.Forms.Timer secondlyTimer = null;
 		private static System.Windows.Forms.Timer thirtyMinuteTimer = null;
-		private static RTable daily_disposable_events_table = null;
+		private static FastTable daily_disposable_events_table = null;
+		//private static RTable daily_disposable_events_table = null;
 		private static DateTime last_daily_alert_not_including_before_loadtime_alerts_time = DateTime.MinValue; //should be loaded from file later for non-disposable events
 		private static DateTime settings_load_datetime = DateTime.Now;
 		private static DateTime program_load_datetime = DateTime.Now;
@@ -209,6 +211,7 @@ namespace ExpertMultimedia
 				daily_disposable_events_table = new RTable();
 				Console.Error.WriteLine("Setting schedule to '"+events_file_path+"' since today is in it's daterange.");
 				daily_disposable_events_table.Load(events_file_path, true);
+				if (daily_disposable_events_table
 			}
 			else {
 				daily_disposable_events_table=null;
