@@ -9,7 +9,7 @@ This program can replace hardware school bell systems, but the computer must be 
 - Run events on a specific minute, only on certain days of the week.
 - Event Category, which explains what to do (sound or message box), can be assigned to any number of times (down to the minute, so up to once every minute).
 - The calendar can contain different schedules for different date ranges in the year.
-- A schedule can be assigned to any number of date ranges, so you don't have to make two schedules (such as if both terms have the same bell times).
+- A schedule can be assigned to any number of date ranges, so you don't have to make two schedules (such as if both terms have the same bell times: see defaults/daterange-result.yml for an example using a schedule called "school year").
 
 
 ## Install
@@ -31,7 +31,7 @@ The computer must be not logged in. Ensure that the speakers are on and turned u
 ### Missing configuration
 To see stats, including the last error, right-click the tray icon then click "About." The error with several instances of **"missing...column"** indicates that the network location was inaccessible when the program loaded (a missing bell sound error may rather indicate a bad configuration or an outage at the time it tried to play a bell).
 
-The configuration file pulls from the network, so if there was an outage try logging off then back on which is the easiest way to reload the tray icon. Ensuring only one user is logged in at once may be necessary.
+The configuration file pulls from the network, so if there was an outage try logging off then back on which is the easiest way to reload the tray icon. Otherwise, close the tray icon then run the program manually from C:\ProgramData\IntegratorEduTeacherNotify. Ensuring only one user is logged in at once may be necessary (see [Issue #4](https://github.com/poikilos/IntegratorEduTeacherNotify/issues/4)).
 
 You must keep the configuration intact at the network location \\fcafiles\main\Operations\BellSettings (make sure you keep it backed up).
 If you must use another location, you must put the location (and nothing else) in the data_path file in C:\ProgramData\IntegratorEduTeacherNotify\. If you do not have a configuration you must create one (See the "defaults" directory and "Configuration" section below for examples and more information).
