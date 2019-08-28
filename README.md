@@ -3,10 +3,19 @@ Run scheduled sounds and messages, such as from a central network configuration 
 
 This program can replace hardware school bell systems, but the computer must be logged in and the speakers must be on.
 
+## Features
+- Play a sound.
+- Show a message (optionally customize MessageBox heading).
+- Run events on a specific minute, only on certain days of the week.
+- Event Category, which explains what to do (sound or message box), can be assigned to any number of times (down to the minute, so up to once every minute).
+- The calendar can contain different schedules for different date ranges in the year.
+- A schedule can be assigned to any number of date ranges, so you don't have to make two schedules (such as if both terms have the same bell times).
+
+
 ## Install
 To ensure it runs on startup, but the best way is to put the unzipped release on a flash drive and run (You probably have to right click and run as administrator): "install-from-here.." batch file, which will install the program correctly and run the reg file that makes the program run on startup (for all users) pointing to the location to which it installs. The batch file cannot be in a network location (see the other batch file for that purpose).
 
-Recommended settings for replacing a hardware school bell system: 1 sec bell sound for beginning of class, 2 sec for end, 3 sec for end of school day. The pattern is less monotonous (than having all the same length) since it is more communicative. See "Configuration" below.
+Recommended settings for replacing a hardware school bell system: 1 sec bell sound for beginning of class, 2 sec for end, 3 sec for end of school day. The pattern is less monotonous (than having all the same length) since it is more communicative. Save each sound file to the configuration folder in a subfolder called "sounds." See "Configuration" below.
 
 
 ## Troubleshooting
@@ -20,9 +29,9 @@ If all software bells stopped, the vacation setting is likely all that has affec
 The computer must be not logged in. Ensure that the speakers are on and turned up enough.
 
 ### Missing configuration
-To see stats, including the last error, right-click the tray icon then click "About." The error with several instances of **"missing...column"** indicates that the network location was inaccessible when the program loaded (a missing bell sound error may indicate an outage after that at the time it tried to play a bell).
+To see stats, including the last error, right-click the tray icon then click "About." The error with several instances of **"missing...column"** indicates that the network location was inaccessible when the program loaded (a missing bell sound error may rather indicate a bad configuration or an outage at the time it tried to play a bell).
 
-The configuration file pulls from the network, so if there was an outage try logging off then back on which is the easiest way to reload the tray icon.
+The configuration file pulls from the network, so if there was an outage try logging off then back on which is the easiest way to reload the tray icon. Ensuring only one user is logged in at once may be necessary.
 
 You must keep the configuration intact at the network location \\fcafiles\main\Operations\BellSettings (make sure you keep it backed up).
 If you must use another location, you must put the location (and nothing else) in the data_path file in C:\ProgramData\IntegratorEduTeacherNotify\. If you do not have a configuration you must create one (See the "defaults" directory and "Configuration" section below for examples and more information).
@@ -36,18 +45,7 @@ See CHANGELOG.md.
 
 
 ## Known Issues
-(See also <https://github.com/poikilos/IntegratorEduTeacherNotify> then click "Issues.")
-
-- Should only play sound once if missed instead of looping continuously (such as if screen was locked and another person signs in while other user is still signed in)
-
-
-## Features
-- Play a sound
-- Show a message (optionally customize MessageBox heading)
-- Events on a specific minute, only on certain days of the week
-- Event Category, which explains what to do, can be assigned to any number of times (down to the minute, so up to once every minute).
-- Calendar can contain different schedules for different date ranges in the year
-- A schedule can be assigned to any number of date ranges
+See [IntegratorEduTeacherNotify Issues](https://github.com/poikilos/IntegratorEduTeacherNotify/issues) on GitHub.
 
 
 ## Configuration
@@ -55,7 +53,7 @@ See CHANGELOG.md.
 - For editing yml and csv files, I recommend Notepad++ if you are using Windows. Geany is fine as long as you don't have it set to convert spaces to tabs. You must use 2 spaces to indent the data fields of each array item. The date ranges file is in a limited YAML format, which you can edit with a text editor.
 - The data folder contains a settings.yml, RecurringEventCategories, any media you want to run at a scheduled time in any folder you want, and calendar folders
   - settings.yml file says which calendar to use (basename of subfolder of data folder)
-  - RecurringEventCategories contains yml files that events can use to determine what media to run. For example, the file can be called End.yml (can contain one or more of these lines):
+  - RecurringEventCategories contains yml files that events can use to determine what media to run. For example, the file can be called End.yml (an event can contain one or more of these lines; each event must at least have a sound or message to do anything):
     - sound: sounds\bell2.wav
     - message: Leave for early lunch in room x today
     - message_heading: Example Inc. Notification
