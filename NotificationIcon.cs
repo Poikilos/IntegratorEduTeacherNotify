@@ -13,7 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
-using Microsoft.VisualBasic.FileIO; // TextFieldParser (requires VisualBasic.dll
+//using Microsoft.VisualBasic.FileIO; // TextFieldParser (requires VisualBasic.dll
 
 namespace ExpertMultimedia
 {
@@ -35,7 +35,7 @@ namespace ExpertMultimedia
 		private static string locally_ignored_categories_file_name="ignored_categories.txt";
 		private static ArrayList locally_ignored_categories_list=null;
 		private static readonly string my_display_name = "IntegratorEdu TeacherNotify";
-		private static readonly string my_display_name_and_version = "IntegratorEdu TeacherNotify (r20161011)";
+		private static readonly string my_display_name_and_version = "IntegratorEdu TeacherNotify (1.0)";
 		private static readonly string my_about_string = "This program executes important organization-scheduled alerts which may include messages or periodic sounds.";
 		private static int secondly_check_count = 0;
 		private static int thirty_minute_check_count = 0;
@@ -208,10 +208,10 @@ namespace ExpertMultimedia
 			recurring_event_categories.Clear();
 			if (schedule_path!=null) {
 				events_file_path = Path.Combine(schedule_path, "Events, Daily Disposable.csv");
-				daily_disposable_events_table = new RTable();
+				daily_disposable_events_table = new FastTable();
 				Console.Error.WriteLine("Setting schedule to '"+events_file_path+"' since today is in it's daterange.");
 				daily_disposable_events_table.Load(events_file_path, true);
-				if (daily_disposable_events_table
+				//TODO: (show an error if there is a problem) if (daily_disposable_events_table.
 			}
 			else {
 				daily_disposable_events_table=null;

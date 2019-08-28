@@ -55,9 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\IntegratorEdu\YAMLObject.cs">
-      <Link>YAMLObject.cs</Link>
-    </Compile>
     <Compile Include="FastTable.cs" />
     <Compile Include="IEduEventCategory.cs" />
     <Compile Include="MessageForm.cs" />
@@ -66,6 +63,7 @@
     </Compile>
     <Compile Include="NotificationIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YAMLObject.cs" />
     <EmbeddedResource Include="MessageForm.resx">
       <DependentUpon>MessageForm.cs</DependentUpon>
     </EmbeddedResource>
